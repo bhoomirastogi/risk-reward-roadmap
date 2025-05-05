@@ -4,7 +4,7 @@ import { UserProfile, StockRecommendation } from '../utils/stockRecommendations'
 import StockCard from './StockCard';
 import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChartPie, CircleCheck, Info } from "lucide-react";
+import { PieChart, CircleCheck, Info } from "lucide-react";
 
 interface ResultsPageProps {
   userProfile: UserProfile;
@@ -41,16 +41,16 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ userProfile, recommendations,
         <div className="inline-flex justify-center items-center mb-4 w-16 h-16 rounded-full bg-green-100">
           <CircleCheck className="h-8 w-8 text-finance-green" />
         </div>
-        <h2 className="text-3xl font-bold text-gray-900 mb-2">Your Personalized Stock Recommendations</h2>
+        <h2 className="text-3xl font-bold text-gray-900 mb-2">Your Personalized Indian Stock Recommendations</h2>
         <p className="text-gray-600 max-w-2xl mx-auto">
-          Based on your {getRiskText()} risk profile and {getTermText()} investment horizon, here are our recommended stocks for your ${userProfile.investmentAmount.toLocaleString()} investment.
+          Based on your {getRiskText()} risk profile and {getTermText()} investment horizon, here are our recommended Indian stocks for your ₹{userProfile.investmentAmount.toLocaleString()} investment.
         </p>
       </div>
       
       <Card className="mb-8 border-none shadow-lg animate-fade-in">
         <CardHeader className="pb-2">
           <div className="flex items-center space-x-2">
-            <ChartPie className="h-5 w-5 text-finance-blue" />
+            <PieChart className="h-5 w-5 text-finance-blue" />
             <h3 className="text-xl font-semibold">Investment Summary</h3>
           </div>
         </CardHeader>
@@ -66,12 +66,12 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ userProfile, recommendations,
             </div>
             <div className="bg-gray-50 p-4 rounded-lg">
               <p className="text-sm text-gray-600">Initial Investment</p>
-              <p className="text-lg font-medium">${userProfile.investmentAmount.toLocaleString()}</p>
+              <p className="text-lg font-medium">₹{userProfile.investmentAmount.toLocaleString()}</p>
             </div>
             {userProfile.monthlyAddition ? (
               <div className="bg-gray-50 p-4 rounded-lg">
                 <p className="text-sm text-gray-600">Monthly Addition</p>
-                <p className="text-lg font-medium">${userProfile.monthlyAddition.toLocaleString()}</p>
+                <p className="text-lg font-medium">₹{userProfile.monthlyAddition.toLocaleString()}</p>
               </div>
             ) : (
               <div className="bg-gray-50 p-4 rounded-lg">
@@ -86,7 +86,7 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ userProfile, recommendations,
             <div>
               <h4 className="font-medium mb-1">Important Note</h4>
               <p className="text-sm text-gray-700">
-                These recommendations are for educational purposes only and do not constitute financial advice. Always conduct your own research or consult with a financial advisor before making investment decisions.
+                These recommendations are for educational purposes only and do not constitute financial advice. Always conduct your own research or consult with a financial advisor before making investment decisions in Indian markets.
               </p>
             </div>
           </div>

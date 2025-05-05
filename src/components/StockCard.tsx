@@ -9,7 +9,7 @@ interface StockCardProps {
 }
 
 const StockCard: React.FC<StockCardProps> = ({ stock, investmentAmount }) => {
-  // Calculate the dollar amount based on allocation percentage
+  // Calculate the rupee amount based on allocation percentage
   const allocationAmount = (stock.allocation / 100) * investmentAmount;
   
   // Determine if the stock has been performing well
@@ -50,7 +50,7 @@ const StockCard: React.FC<StockCardProps> = ({ stock, investmentAmount }) => {
         
         <div className="flex justify-between">
           <span className="text-sm font-medium text-gray-700">Amount</span>
-          <span className="text-sm font-semibold">${allocationAmount.toLocaleString(undefined, {
+          <span className="text-sm font-semibold">₹{allocationAmount.toLocaleString(undefined, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
           })}</span>

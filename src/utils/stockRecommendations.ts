@@ -22,127 +22,127 @@ export interface StockRecommendation {
   description: string;
 }
 
-// Mock data for stock recommendations
+// Mock data for Indian stock recommendations
 const stockDatabase: StockRecommendation[] = [
   {
     id: '1',
-    ticker: 'AAPL',
-    name: 'Apple Inc.',
+    ticker: 'RELIANCE',
+    name: 'Reliance Industries Ltd.',
     allocation: 0,
     risk: 'medium',
-    sector: 'Technology',
-    fiveYearPerformance: 325,
-    description: 'Global technology company that designs and manufactures consumer electronics, software, and services.'
+    sector: 'Oil & Gas',
+    fiveYearPerformance: 185,
+    description: 'Indian conglomerate with businesses in energy, petrochemicals, textiles, retail, and telecommunications.'
   },
   {
     id: '2',
-    ticker: 'MSFT',
-    name: 'Microsoft Corporation',
+    ticker: 'TCS',
+    name: 'Tata Consultancy Services Ltd.',
     allocation: 0,
     risk: 'medium',
-    sector: 'Technology',
-    fiveYearPerformance: 380,
-    description: 'Technology company that develops, manufactures, licenses, supports, and sells computer software, consumer electronics, and personal computers.'
+    sector: 'Information Technology',
+    fiveYearPerformance: 130,
+    description: 'India\'s largest IT services company providing consulting, technology, and outsourcing services.'
   },
   {
     id: '3',
-    ticker: 'AMZN',
-    name: 'Amazon.com Inc.',
+    ticker: 'HDFCBANK',
+    name: 'HDFC Bank Ltd.',
     allocation: 0,
     risk: 'medium',
-    sector: 'Consumer Cyclical',
-    fiveYearPerformance: 170,
-    description: 'Multinational technology company focusing on e-commerce, cloud computing, digital streaming, and artificial intelligence.'
+    sector: 'Banking',
+    fiveYearPerformance: 110,
+    description: 'One of India\'s leading private sector banks with a strong presence in retail and corporate banking.'
   },
   {
     id: '4',
-    ticker: 'GOOGL',
-    name: 'Alphabet Inc.',
+    ticker: 'INFY',
+    name: 'Infosys Ltd.',
     allocation: 0,
     risk: 'medium',
-    sector: 'Technology',
-    fiveYearPerformance: 155,
-    description: 'Multinational conglomerate created through a restructuring of Google, owning several companies including Google, Waymo, and others.'
+    sector: 'Information Technology',
+    fiveYearPerformance: 145,
+    description: 'Global leader in next-generation digital services and consulting, helping clients in digital transformation.'
   },
   {
     id: '5',
-    ticker: 'BRK.B',
-    name: 'Berkshire Hathaway',
+    ticker: 'SBIN',
+    name: 'State Bank of India',
     allocation: 0,
     risk: 'low',
-    sector: 'Financial Services',
-    fiveYearPerformance: 90,
-    description: 'Multinational conglomerate holding company led by Warren Buffett with a diverse range of business activities.'
+    sector: 'Banking',
+    fiveYearPerformance: 75,
+    description: 'India\'s largest public sector bank with a significant market share in domestic banking.'
   },
   {
     id: '6',
-    ticker: 'JNJ',
-    name: 'Johnson & Johnson',
+    ticker: 'SUNPHARMA',
+    name: 'Sun Pharmaceutical Industries Ltd.',
     allocation: 0,
     risk: 'low',
     sector: 'Healthcare',
-    fiveYearPerformance: 44,
-    description: 'American multinational corporation that develops medical devices, pharmaceuticals, and consumer packaged goods.'
+    fiveYearPerformance: 65,
+    description: 'India\'s largest pharmaceutical company specializing in generic drugs and active pharmaceutical ingredients.'
   },
   {
     id: '7',
-    ticker: 'PG',
-    name: 'Procter & Gamble',
+    ticker: 'HUL',
+    name: 'Hindustan Unilever Ltd.',
     allocation: 0,
     risk: 'low',
-    sector: 'Consumer Defensive',
-    fiveYearPerformance: 75,
-    description: 'American multinational consumer goods corporation specializing in a wide range of personal health, consumer health, and hygiene products.'
+    sector: 'Consumer Goods',
+    fiveYearPerformance: 120,
+    description: 'India\'s largest fast-moving consumer goods company with products ranging from food to personal care.'
   },
   {
     id: '8',
-    ticker: 'NVDA',
-    name: 'NVIDIA Corporation',
+    ticker: 'BAJFINANCE',
+    name: 'Bajaj Finance Ltd.',
     allocation: 0,
     risk: 'high',
-    sector: 'Technology',
-    fiveYearPerformance: 1400,
-    description: 'American multinational technology company that designs graphics processing units (GPUs) for gaming and professional markets.'
+    sector: 'Finance',
+    fiveYearPerformance: 340,
+    description: 'One of India\'s leading non-banking financial companies offering various financial services and loans.'
   },
   {
     id: '9',
-    ticker: 'TSLA',
-    name: 'Tesla, Inc.',
+    ticker: 'ADANIPORTS',
+    name: 'Adani Ports and Special Economic Zone Ltd.',
     allocation: 0,
     risk: 'high',
-    sector: 'Auto Manufacturers',
-    fiveYearPerformance: 1000,
-    description: 'American electric vehicle and clean energy company that designs and manufactures electric cars, battery energy storage, and solar panels.'
+    sector: 'Infrastructure',
+    fiveYearPerformance: 180,
+    description: 'India\'s largest private port operator with a portfolio of ports and logistics businesses.'
   },
   {
     id: '10',
-    ticker: 'VOO',
-    name: 'Vanguard S&P 500 ETF',
+    ticker: 'NIFTYBEES',
+    name: 'Nippon India ETF Nifty BeES',
     allocation: 0,
     risk: 'medium',
     sector: 'ETF',
-    fiveYearPerformance: 88,
-    description: 'Exchange-traded fund that tracks the performance of the S&P 500 Index, providing broad exposure to large U.S. companies.'
+    fiveYearPerformance: 90,
+    description: 'Exchange-traded fund that tracks the performance of the Nifty 50 Index, providing exposure to India\'s top 50 companies.'
   },
   {
     id: '11',
-    ticker: 'VTI',
-    name: 'Vanguard Total Stock Market ETF',
+    ticker: 'BANKBEES',
+    name: 'Nippon India ETF Bank BeES',
     allocation: 0,
     risk: 'medium',
     sector: 'ETF',
-    fiveYearPerformance: 84,
-    description: 'Exchange-traded fund that provides exposure to the entire U.S. equity market, including small-, mid-, and large-cap stocks.'
+    fiveYearPerformance: 75,
+    description: 'Exchange-traded fund that provides exposure to India\'s banking sector by tracking the Nifty Bank Index.'
   },
   {
     id: '12',
-    ticker: 'COIN',
-    name: 'Coinbase Global Inc.',
+    ticker: 'ZOMATO',
+    name: 'Zomato Ltd.',
     allocation: 0,
     risk: 'high',
-    sector: 'Financial Services',
+    sector: 'Technology',
     fiveYearPerformance: 30,
-    description: 'American company that operates a cryptocurrency exchange platform, offering a marketplace for cryptocurrencies.'
+    description: 'Indian multinational restaurant aggregator and food delivery company offering restaurant discovery and delivery services.'
   }
 ];
 
@@ -153,7 +153,7 @@ export const getRecommendations = (profile: UserProfile): StockRecommendation[] 
   
   // Filter by risk tolerance
   if (profile.riskTolerance === 'low') {
-    filteredStocks = stockDatabase.filter(stock => stock.risk === 'low' || stock.ticker === 'VOO' || stock.ticker === 'VTI');
+    filteredStocks = stockDatabase.filter(stock => stock.risk === 'low' || stock.ticker === 'NIFTYBEES' || stock.ticker === 'BANKBEES');
   } else if (profile.riskTolerance === 'medium') {
     filteredStocks = stockDatabase.filter(stock => stock.risk === 'low' || stock.risk === 'medium');
   }
@@ -176,7 +176,7 @@ export const getRecommendations = (profile: UserProfile): StockRecommendation[] 
     }
     
     // Investment term adjustments
-    if (profile.investmentTerm === 'short' && stock.ticker.includes('ETF')) {
+    if (profile.investmentTerm === 'short' && stock.ticker.includes('BEES')) {
       allocationWeight *= 0.7;
     }
     if (profile.investmentTerm === 'long' && stock.fiveYearPerformance > 150) {

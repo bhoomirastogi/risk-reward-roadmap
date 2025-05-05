@@ -1,8 +1,9 @@
+
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { ChartPie, TrendingUp, DollarSign, BarChart2 } from "lucide-react";
+import { PieChart, TrendingUp, IndianRupee, BarChart2 } from "lucide-react";
 
 const Dashboard = () => {
   return (
@@ -20,7 +21,7 @@ const Dashboard = () => {
           </div>
         </div>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto mt-4 text-center">
-          Your personalized path to smarter investing
+          Your personalized path to smarter investing in Indian markets
         </p>
       </header>
       
@@ -30,16 +31,8 @@ const Dashboard = () => {
             <h2 className="text-3xl font-bold text-gray-900">Start Your Investment Journey Today</h2>
             <p className="text-lg text-gray-700">
               Spread Wealth helps beginners make informed investment decisions by creating 
-              personalized stock recommendations based on your risk tolerance, investment goals, and budget.
+              personalized Indian stock recommendations based on your risk tolerance, investment goals, and budget.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <Button asChild size="lg" className="bg-finance-blue hover:bg-blue-800">
-                <Link to="/signup">Sign Up</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg" className="bg-white hover:bg-gray-50 border-gray-300 text-gray-700">
-                <Link to="/signin">Sign In</Link>
-              </Button>
-            </div>
           </div>
           <div className="rounded-lg overflow-hidden shadow-lg transform transition-transform duration-500 hover:scale-105">
             <img 
@@ -56,13 +49,13 @@ const Dashboard = () => {
           <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
             <CardHeader className="flex flex-row items-center gap-4 pb-2">
               <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                <DollarSign className="h-6 w-6 text-finance-blue" />
+                <IndianRupee className="h-6 w-6 text-finance-blue" />
               </div>
               <h3 className="text-xl font-semibold">Tell Us Your Goals</h3>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600">
-                Answer a few questions about your investment amount, risk tolerance, and time horizon.
+                Answer a few questions about your investment amount in ₹, risk tolerance, and time horizon.
               </p>
             </CardContent>
           </Card>
@@ -70,13 +63,13 @@ const Dashboard = () => {
           <Card className="border-none shadow-md hover:shadow-lg transition-shadow">
             <CardHeader className="flex flex-row items-center gap-4 pb-2">
               <div className="w-12 h-12 rounded-full bg-blue-100 flex items-center justify-center">
-                <ChartPie className="h-6 w-6 text-finance-blue" />
+                <PieChart className="h-6 w-6 text-finance-blue" />
               </div>
               <h3 className="text-xl font-semibold">Smart Analysis</h3>
             </CardHeader>
             <CardContent>
               <p className="text-gray-600">
-                Our algorithm analyzes 5-year historical stock data to find the best matches for your profile.
+                Our algorithm analyzes 5-year historical data of Indian stocks to find the best matches for your profile.
               </p>
             </CardContent>
           </Card>
@@ -90,7 +83,7 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <p className="text-gray-600">
-                Receive a personalized allocation strategy optimized for your unique investment needs.
+                Receive a personalized allocation strategy optimized for your unique investment needs in the Indian market.
               </p>
             </CardContent>
           </Card>
@@ -104,7 +97,7 @@ const Dashboard = () => {
             </CardHeader>
             <CardContent>
               <p className="text-gray-600">
-                Begin your investment journey with confidence, backed by data-driven recommendations.
+                Begin your investment journey with confidence, backed by data-driven recommendations for Indian equities.
               </p>
             </CardContent>
           </Card>
@@ -118,7 +111,7 @@ const Dashboard = () => {
                 <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Beginner Friendly" className="w-16 h-16 rounded-full object-cover transition-all duration-300 hover:brightness-110" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Beginner Friendly</h3>
-              <p className="text-gray-600">No prior investment knowledge required. We guide you through every step.</p>
+              <p className="text-gray-600">No prior investment knowledge required. We guide you through the Indian stock market step by step.</p>
             </div>
             
             <div className="flex flex-col items-center text-center">
@@ -126,7 +119,7 @@ const Dashboard = () => {
                 <img src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Data Driven" className="w-16 h-16 rounded-full object-cover transition-all duration-300 hover:brightness-110" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Data Driven</h3>
-              <p className="text-gray-600">Our recommendations are based on historical performance and market analysis.</p>
+              <p className="text-gray-600">Our recommendations are based on historical performance of Indian equities and market analysis.</p>
             </div>
             
             <div className="flex flex-col items-center text-center">
@@ -134,7 +127,7 @@ const Dashboard = () => {
                 <img src="https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80" alt="Personalized" className="w-16 h-16 rounded-full object-cover transition-all duration-300 hover:brightness-110" />
               </div>
               <h3 className="text-lg font-semibold mb-2">Personalized</h3>
-              <p className="text-gray-600">Custom recommendations tailored to your unique financial situation and goals.</p>
+              <p className="text-gray-600">Custom recommendations tailored to your unique financial situation and goals for the Indian market.</p>
             </div>
           </div>
         </div>
@@ -142,7 +135,7 @@ const Dashboard = () => {
       
       <footer className="mt-16 text-center text-sm text-gray-500">
         <p>© {new Date().getFullYear()} Spread Wealth. All data is for demonstration purposes only.</p>
-        <p className="mt-1">Not financial advice. Always do your own research before investing.</p>
+        <p className="mt-1">Not financial advice. Always do your own research before investing in Indian markets.</p>
       </footer>
     </div>
   );
