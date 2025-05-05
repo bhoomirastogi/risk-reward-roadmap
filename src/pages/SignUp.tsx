@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Mail, Lock, User, Calendar } from "lucide-react";
+import { Mail, Lock, User, Calendar, PieChart } from "lucide-react";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -58,7 +58,7 @@ const SignUp = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Link to="/" className="flex justify-center">
-          <ChartPie className="mx-auto h-12 w-12 text-finance-blue" />
+          <PieChart className="mx-auto h-12 w-12 text-finance-blue" />
         </Link>
         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
           Create your account
