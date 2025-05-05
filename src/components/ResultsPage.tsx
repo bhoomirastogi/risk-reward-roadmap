@@ -4,7 +4,7 @@ import { UserProfile, StockRecommendation } from '../utils/stockRecommendations'
 import StockCard from './StockCard';
 import { Card, CardContent, CardHeader, CardFooter } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { ChartPie, CircleCheck, InfoCircle } from "lucide-react";
+import { ChartPie, CircleCheck, Info } from "lucide-react";
 
 interface ResultsPageProps {
   userProfile: UserProfile;
@@ -82,7 +82,7 @@ const ResultsPage: React.FC<ResultsPageProps> = ({ userProfile, recommendations,
           </div>
           
           <div className="mt-6 p-4 bg-blue-50 border border-blue-100 rounded-lg flex items-start">
-            <InfoCircle className="h-5 w-5 text-finance-blue mr-3 mt-0.5" />
+            <Info className="h-5 w-5 text-finance-blue mr-3 mt-0.5" />
             <div>
               <h4 className="font-medium mb-1">Important Note</h4>
               <p className="text-sm text-gray-700">
