@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { z } from "zod";
@@ -58,21 +57,21 @@ const SignUp = () => {
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <Link to="/" className="flex justify-center">
-          <PieChart className="mx-auto h-12 w-12 text-finance-blue" />
+          <PieChart className="mx-auto h-12 w-12 text-finance-blue transition-transform duration-300 hover:scale-110" />
         </Link>
         <h2 className="mt-6 text-center text-3xl font-bold tracking-tight text-gray-900">
-          Create your account
+          Create your Spread Wealth account
         </h2>
         <p className="mt-2 text-center text-sm text-gray-600">
           Already have an account?{" "}
-          <Link to="/signin" className="font-medium text-finance-blue hover:text-blue-800">
+          <Link to="/signin" className="font-medium text-finance-blue hover:text-blue-800 transition-colors duration-300">
             Sign in
           </Link>
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <Card className="border-none shadow-lg">
+        <Card className="border-none shadow-lg transition-transform duration-300 hover:shadow-xl">
           <CardHeader className="space-y-1">
             <CardTitle className="text-xl">Sign Up</CardTitle>
             <CardDescription>

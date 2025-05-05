@@ -31,7 +31,7 @@ const Index = () => {
     <div className="min-h-screen bg-gray-50 py-12">
       <header className="mb-12">
         <div className="max-w-7xl mx-auto px-4 flex items-center justify-between">
-          <h1 className="text-4xl font-bold text-finance-blue">Smart Stock Allocator</h1>
+          <h1 className="text-4xl font-bold text-finance-blue">Spread Wealth</h1>
           <Link to="/">
             <Button variant="outline" className="flex items-center gap-2">
               <ArrowLeft size={16} />
@@ -59,7 +59,7 @@ const Index = () => {
       </main>
       
       <footer className="mt-16 text-center text-sm text-gray-500">
-        <p>© {new Date().getFullYear()} Smart Stock Allocator. All data is for demonstration purposes only.</p>
+        <p>© {new Date().getFullYear()} Spread Wealth. All data is for demonstration purposes only.</p>
         <p className="mt-1">Not financial advice. Always do your own research before investing.</p>
       </footer>
     </div>
