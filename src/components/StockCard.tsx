@@ -2,6 +2,7 @@
 import React from 'react';
 import { StockRecommendation } from '../utils/stockRecommendations';
 import { ArrowUp, ArrowDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 interface StockCardProps {
   stock: StockRecommendation;
@@ -61,7 +62,12 @@ const StockCard: React.FC<StockCardProps> = ({ stock, investmentAmount }) => {
         <span className={`px-2 py-1 rounded-full ${stock.risk === 'low' ? 'bg-green-100 text-green-800' : stock.risk === 'medium' ? 'bg-yellow-100 text-yellow-800' : 'bg-red-100 text-red-800'}`}>
           {stock.risk.toUpperCase()} RISK
         </span>
-        <span className="text-gray-500">{stock.sector}</span>
+        <Link 
+          to="/stock-prices" 
+          className="text-finance-blue hover:underline"
+        >
+          View History
+        </Link>
       </div>
     </div>
   );
