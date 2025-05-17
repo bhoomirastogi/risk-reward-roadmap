@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { PieChart, TrendingUp, IndianRupee, BarChart2 } from "lucide-react";
+import { PieChart, TrendingUp, IndianRupee, BarChart2, LineChart } from "lucide-react";
 
 const Dashboard = () => {
   return (
@@ -17,6 +17,12 @@ const Dashboard = () => {
             </Button>
             <Button asChild className="bg-finance-blue hover:bg-blue-800">
               <Link to="/signup">Sign Up</Link>
+            </Button>
+            <Button asChild variant="outline" className="bg-white hover:bg-gray-50 border-finance-blue text-finance-blue">
+              <Link to="/stock-prices" className="flex items-center gap-2">
+                <LineChart className="h-4 w-4" />
+                <span>Explore</span>
+              </Link>
             </Button>
           </div>
         </div>
