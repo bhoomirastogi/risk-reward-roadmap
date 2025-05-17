@@ -6,12 +6,13 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { stockHistoricalData } from '../utils/stockHistoricalData';
 import { ChartContainer } from '@/components/ui/chart';
 import { Line, LineChart, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { ArrowUp, ArrowDown } from 'lucide-react';
+import { ArrowUp, ArrowDown, BarChart3, LineChart as LineChartIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
 const StockPrices: React.FC = () => {
   const [selectedSector, setSelectedSector] = useState<string>("All");
+  const [viewMode, setViewMode] = useState<'charts' | 'table'>('charts');
   
   // Filter stocks by selected sector
   const filteredStocks = selectedSector === "All" 
@@ -23,6 +24,10 @@ const StockPrices: React.FC = () => {
   
   // Get years for the table
   const years = ["2020", "2021", "2022", "2023", "2024"];
+
+  const toggleView = () => {
+    setViewMode(viewMode === 'charts' ? 'table' : 'charts');
+  };
   
   return (
     <div className="container mx-auto px-4 py-6">
@@ -34,11 +39,6 @@ const StockPrices: React.FC = () => {
               Get Recommendations
             </Link>
           </Button>
-          <Button variant="outline" asChild>
-            <Link to="/signin">
-              Sign In
-            </Link>
-          </Button>
         </div>
       </div>
       
@@ -46,102 +46,210 @@ const StockPrices: React.FC = () => {
         <CardHeader>
           <CardTitle className="flex justify-between items-center">
             <span>Filter by Sector</span>
-            <Select value={selectedSector} onValueChange={setSelectedSector}>
-              <SelectTrigger className="w-[180px]">
-                <SelectValue placeholder="Select sector" />
-              </SelectTrigger>
-              <SelectContent>
-                {sectors.map(sector => (
-                  <SelectItem key={sector} value={sector}>
-                    {sector}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <div className="flex items-center gap-4">
+              <Select value={selectedSector} onValueChange={setSelectedSector}>
+                <SelectTrigger className="w-[180px]">
+                  <SelectValue placeholder="Select sector" />
+                </SelectTrigger>
+                <SelectContent>
+                  {sectors.map(sector => (
+                    <SelectItem key={sector} value={sector}>
+                      {sector}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              <Button 
+                variant="outline" 
+                onClick={toggleView} 
+                className="flex items-center gap-2"
+              >
+                {viewMode === 'charts' ? (
+                  <>
+                    <BarChart3 className="h-4 w-4" />
+                    <span>View Table</span>
+                  </>
+                ) : (
+                  <>
+                    <LineChartIcon className="h-4 w-4" />
+                    <span>View Charts</span>
+                  </>
+                )}
+              </Button>
+            </div>
           </CardTitle>
         </CardHeader>
       </Card>
 
-      <div className="grid md:grid-cols-2 gap-6 mb-8">
-        {filteredStocks.slice(0, 4).map(stock => (
-          <Card key={stock.ticker} className="overflow-hidden">
-            <CardHeader className="pb-2">
-              <CardTitle className="flex justify-between">
-                <div>
-                  <span className="text-xl font-bold">{stock.ticker}</span>
-                  <span className="ml-2 text-sm text-gray-500">{stock.name}</span>
+      {viewMode === 'charts' ? (
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
+          {filteredStocks.slice(0, 4).map(stock => (
+            <Card key={stock.ticker} className="overflow-hidden">
+              <CardHeader className="pb-2">
+                <CardTitle className="flex justify-between">
+                  <div>
+                    <span className="text-xl font-bold">{stock.ticker}</span>
+                    <span className="ml-2 text-sm text-gray-500">{stock.name}</span>
+                  </div>
+                  <div className="flex items-center">
+                    {stock.performance > 0 ? (
+                      <ArrowUp className="text-finance-green mr-1 h-5 w-5" />
+                    ) : (
+                      <ArrowDown className="text-finance-red mr-1 h-5 w-5" />
+                    )}
+                    <span className={`font-medium ${stock.performance > 0 ? 'text-finance-green' : 'text-finance-red'}`}>
+                      {stock.performance}%
+                    </span>
+                  </div>
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="h-[200px]">
+                  <ResponsiveContainer width="100%" height="100%">
+                    <LineChart data={stock.historicalPrices}>
+                      <XAxis dataKey="year" />
+                      <YAxis />
+                      <Tooltip formatter={(value) => [`₹${value}`, 'Price']} />
+                      <Legend />
+                      <Line 
+                        type="monotone" 
+                        dataKey="price" 
+                        stroke={stock.performance > 0 ? "#16a34a" : "#dc2626"} 
+                        name="Price (₹)"
+                        strokeWidth={2}
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
                 </div>
-                <div className="flex items-center">
-                  {stock.performance > 0 ? (
-                    <ArrowUp className="text-finance-green mr-1 h-5 w-5" />
-                  ) : (
-                    <ArrowDown className="text-finance-red mr-1 h-5 w-5" />
-                  )}
-                  <span className={`font-medium ${stock.performance > 0 ? 'text-finance-green' : 'text-finance-red'}`}>
-                    {stock.performance}%
-                  </span>
-                </div>
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="h-[200px]">
-                <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={stock.historicalPrices}>
-                    <XAxis dataKey="year" />
-                    <YAxis />
-                    <Tooltip formatter={(value) => [`₹${value}`, 'Price']} />
-                    <Legend />
-                    <Line 
-                      type="monotone" 
-                      dataKey="price" 
-                      stroke={stock.performance > 0 ? "#16a34a" : "#dc2626"} 
-                      name="Price (₹)"
-                      strokeWidth={2}
-                    />
-                  </LineChart>
-                </ResponsiveContainer>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      ) : (
+        <Card className="overflow-hidden mb-8">
+          <CardHeader>
+            <CardTitle>Year-wise Stock Performance Table</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Stock</TableHead>
+                  <TableHead>Sector</TableHead>
+                  {years.map(year => (
+                    <TableHead key={year} className="text-right">{year}</TableHead>
+                  ))}
+                  <TableHead className="text-right">5Y Return</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredStocks.map(stock => (
+                  <TableRow key={stock.ticker}>
+                    <TableCell className="font-medium">
+                      {stock.ticker}
+                      <div className="text-xs text-gray-500">{stock.name}</div>
+                    </TableCell>
+                    <TableCell>{stock.sector}</TableCell>
+                    {stock.historicalPrices.map(item => (
+                      <TableCell key={item.year} className="text-right">
+                        ₹{item.price.toLocaleString()}
+                      </TableCell>
+                    ))}
+                    <TableCell className={`text-right font-medium ${stock.performance > 0 ? 'text-finance-green' : 'text-finance-red'}`}>
+                      {stock.performance > 0 ? '+' : ''}{stock.performance}%
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )}
 
       <Card className="overflow-hidden">
         <CardHeader>
-          <CardTitle>Year-wise Stock Performance Table</CardTitle>
+          <CardTitle>
+            {viewMode === 'table' ? 'Stock Price Charts' : 'Full Stock Data Table'}
+          </CardTitle>
         </CardHeader>
         <CardContent>
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Stock</TableHead>
-                <TableHead>Sector</TableHead>
-                {years.map(year => (
-                  <TableHead key={year} className="text-right">{year}</TableHead>
-                ))}
-                <TableHead className="text-right">5Y Return</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {filteredStocks.map(stock => (
-                <TableRow key={stock.ticker}>
-                  <TableCell className="font-medium">
-                    {stock.ticker}
-                    <div className="text-xs text-gray-500">{stock.name}</div>
-                  </TableCell>
-                  <TableCell>{stock.sector}</TableCell>
-                  {stock.historicalPrices.map(item => (
-                    <TableCell key={item.year} className="text-right">
-                      ₹{item.price.toLocaleString()}
-                    </TableCell>
-                  ))}
-                  <TableCell className={`text-right font-medium ${stock.performance > 0 ? 'text-finance-green' : 'text-finance-red'}`}>
-                    {stock.performance > 0 ? '+' : ''}{stock.performance}%
-                  </TableCell>
-                </TableRow>
+          {viewMode === 'table' ? (
+            <div className="grid md:grid-cols-2 gap-6">
+              {filteredStocks.slice(0, 4).map(stock => (
+                <Card key={stock.ticker} className="overflow-hidden">
+                  <CardHeader className="pb-2">
+                    <CardTitle className="flex justify-between">
+                      <div>
+                        <span className="text-xl font-bold">{stock.ticker}</span>
+                        <span className="ml-2 text-sm text-gray-500">{stock.name}</span>
+                      </div>
+                      <div className="flex items-center">
+                        {stock.performance > 0 ? (
+                          <ArrowUp className="text-finance-green mr-1 h-5 w-5" />
+                        ) : (
+                          <ArrowDown className="text-finance-red mr-1 h-5 w-5" />
+                        )}
+                        <span className={`font-medium ${stock.performance > 0 ? 'text-finance-green' : 'text-finance-red'}`}>
+                          {stock.performance}%
+                        </span>
+                      </div>
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="h-[200px]">
+                      <ResponsiveContainer width="100%" height="100%">
+                        <LineChart data={stock.historicalPrices}>
+                          <XAxis dataKey="year" />
+                          <YAxis />
+                          <Tooltip formatter={(value) => [`₹${value}`, 'Price']} />
+                          <Legend />
+                          <Line 
+                            type="monotone" 
+                            dataKey="price" 
+                            stroke={stock.performance > 0 ? "#16a34a" : "#dc2626"} 
+                            name="Price (₹)"
+                            strokeWidth={2}
+                          />
+                        </LineChart>
+                      </ResponsiveContainer>
+                    </div>
+                  </CardContent>
+                </Card>
               ))}
-            </TableBody>
-          </Table>
+            </div>
+          ) : (
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Stock</TableHead>
+                  <TableHead>Sector</TableHead>
+                  {years.map(year => (
+                    <TableHead key={year} className="text-right">{year}</TableHead>
+                  ))}
+                  <TableHead className="text-right">5Y Return</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {filteredStocks.map(stock => (
+                  <TableRow key={stock.ticker}>
+                    <TableCell className="font-medium">
+                      {stock.ticker}
+                      <div className="text-xs text-gray-500">{stock.name}</div>
+                    </TableCell>
+                    <TableCell>{stock.sector}</TableCell>
+                    {stock.historicalPrices.map(item => (
+                      <TableCell key={item.year} className="text-right">
+                        ₹{item.price.toLocaleString()}
+                      </TableCell>
+                    ))}
+                    <TableCell className={`text-right font-medium ${stock.performance > 0 ? 'text-finance-green' : 'text-finance-red'}`}>
+                      {stock.performance > 0 ? '+' : ''}{stock.performance}%
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          )}
         </CardContent>
       </Card>
     </div>
