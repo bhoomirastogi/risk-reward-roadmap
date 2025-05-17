@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Mail, Lock, PieChart } from "lucide-react";
+import { Mail, Lock, PieChart, LineChart } from "lucide-react";
 
 const formSchema = z.object({
   email: z.string().email({
@@ -59,6 +59,11 @@ const SignIn = () => {
           Don't have an account?{" "}
           <Link to="/signup" className="font-medium text-finance-blue hover:text-blue-800 transition-colors duration-300">
             Sign up
+          </Link>
+          {" | "}
+          <Link to="/stock-prices" className="font-medium text-finance-blue hover:text-blue-800 transition-colors duration-300 flex items-center justify-center gap-1 inline-flex">
+            <LineChart className="h-4 w-4" />
+            <span>Explore</span>
           </Link>
         </p>
       </div>
@@ -123,6 +128,19 @@ const SignIn = () => {
                 >
                   {isSubmitting ? "Signing in..." : "Sign in"}
                 </Button>
+
+                <div className="flex justify-center">
+                  <Link to="/stock-prices">
+                    <Button 
+                      type="button" 
+                      variant="outline"
+                      className="w-full border-finance-blue text-finance-blue hover:bg-finance-blue/10"
+                    >
+                      <LineChart className="mr-2 h-4 w-4" />
+                      Explore Stock Data
+                    </Button>
+                  </Link>
+                </div>
               </form>
             </Form>
           </CardContent>
