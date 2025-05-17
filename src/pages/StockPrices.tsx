@@ -6,13 +6,15 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { stockHistoricalData } from '../utils/stockHistoricalData';
 import { ChartContainer } from '@/components/ui/chart';
 import { Line, LineChart, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { ArrowUp, ArrowDown, BarChart3, LineChart as LineChartIcon } from 'lucide-react';
+import { ArrowUp, ArrowDown, BarChart3, LineChart as LineChartIcon, Search } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { Toggle } from "@/components/ui/toggle";
 
 const StockPrices: React.FC = () => {
   const [selectedSector, setSelectedSector] = useState<string>("All");
   const [viewMode, setViewMode] = useState<'charts' | 'table'>('charts');
+  const [expandedStock, setExpandedStock] = useState<string | null>(null);
   
   // Filter stocks by selected sector
   const filteredStocks = selectedSector === "All" 
@@ -27,6 +29,10 @@ const StockPrices: React.FC = () => {
 
   const toggleView = () => {
     setViewMode(viewMode === 'charts' ? 'table' : 'charts');
+  };
+
+  const toggleExpandStock = (ticker: string) => {
+    setExpandedStock(expandedStock === ticker ? null : ticker);
   };
   
   return (
@@ -91,7 +97,7 @@ const StockPrices: React.FC = () => {
                     <span className="text-xl font-bold">{stock.ticker}</span>
                     <span className="ml-2 text-sm text-gray-500">{stock.name}</span>
                   </div>
-                  <div className="flex items-center">
+                  <div className="flex items-center gap-2">
                     {stock.performance > 0 ? (
                       <ArrowUp className="text-finance-green mr-1 h-5 w-5" />
                     ) : (
@@ -100,6 +106,15 @@ const StockPrices: React.FC = () => {
                     <span className={`font-medium ${stock.performance > 0 ? 'text-finance-green' : 'text-finance-red'}`}>
                       {stock.performance}%
                     </span>
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      onClick={() => toggleExpandStock(stock.ticker)}
+                      className="ml-2 flex items-center gap-1"
+                    >
+                      <Search className="h-4 w-4" />
+                      Explore
+                    </Button>
                   </div>
                 </CardTitle>
               </CardHeader>
@@ -121,6 +136,36 @@ const StockPrices: React.FC = () => {
                     </LineChart>
                   </ResponsiveContainer>
                 </div>
+                
+                {expandedStock === stock.ticker && (
+                  <div className="mt-6 border-t pt-4">
+                    <h3 className="text-lg font-semibold mb-4">Historical Data for {stock.name}</h3>
+                    <Table>
+                      <TableHeader>
+                        <TableRow>
+                          <TableHead>Year</TableHead>
+                          <TableHead className="text-right">Price (₹)</TableHead>
+                          <TableHead className="text-right">% Change</TableHead>
+                        </TableRow>
+                      </TableHeader>
+                      <TableBody>
+                        {stock.historicalPrices.map((item, index) => {
+                          const prevPrice = index > 0 ? stock.historicalPrices[index - 1].price : item.price;
+                          const percentChange = ((item.price - prevPrice) / prevPrice) * 100;
+                          return (
+                            <TableRow key={item.year}>
+                              <TableCell>{item.year}</TableCell>
+                              <TableCell className="text-right">₹{item.price.toLocaleString()}</TableCell>
+                              <TableCell className={`text-right ${percentChange > 0 ? 'text-finance-green' : 'text-finance-red'}`}>
+                                {index > 0 ? `${percentChange > 0 ? '+' : ''}${percentChange.toFixed(2)}%` : '-'}
+                              </TableCell>
+                            </TableRow>
+                          );
+                        })}
+                      </TableBody>
+                    </Table>
+                  </div>
+                )}
               </CardContent>
             </Card>
           ))}
@@ -183,7 +228,7 @@ const StockPrices: React.FC = () => {
                         <span className="text-xl font-bold">{stock.ticker}</span>
                         <span className="ml-2 text-sm text-gray-500">{stock.name}</span>
                       </div>
-                      <div className="flex items-center">
+                      <div className="flex items-center gap-2">
                         {stock.performance > 0 ? (
                           <ArrowUp className="text-finance-green mr-1 h-5 w-5" />
                         ) : (
@@ -192,6 +237,15 @@ const StockPrices: React.FC = () => {
                         <span className={`font-medium ${stock.performance > 0 ? 'text-finance-green' : 'text-finance-red'}`}>
                           {stock.performance}%
                         </span>
+                        <Button 
+                          variant="outline" 
+                          size="sm" 
+                          onClick={() => toggleExpandStock(stock.ticker)}
+                          className="ml-2 flex items-center gap-1"
+                        >
+                          <Search className="h-4 w-4" />
+                          Explore
+                        </Button>
                       </div>
                     </CardTitle>
                   </CardHeader>
@@ -213,6 +267,36 @@ const StockPrices: React.FC = () => {
                         </LineChart>
                       </ResponsiveContainer>
                     </div>
+                    
+                    {expandedStock === stock.ticker && (
+                      <div className="mt-6 border-t pt-4">
+                        <h3 className="text-lg font-semibold mb-4">Historical Data for {stock.name}</h3>
+                        <Table>
+                          <TableHeader>
+                            <TableRow>
+                              <TableHead>Year</TableHead>
+                              <TableHead className="text-right">Price (₹)</TableHead>
+                              <TableHead className="text-right">% Change</TableHead>
+                            </TableRow>
+                          </TableHeader>
+                          <TableBody>
+                            {stock.historicalPrices.map((item, index) => {
+                              const prevPrice = index > 0 ? stock.historicalPrices[index - 1].price : item.price;
+                              const percentChange = ((item.price - prevPrice) / prevPrice) * 100;
+                              return (
+                                <TableRow key={item.year}>
+                                  <TableCell>{item.year}</TableCell>
+                                  <TableCell className="text-right">₹{item.price.toLocaleString()}</TableCell>
+                                  <TableCell className={`text-right ${percentChange > 0 ? 'text-finance-green' : 'text-finance-red'}`}>
+                                    {index > 0 ? `${percentChange > 0 ? '+' : ''}${percentChange.toFixed(2)}%` : '-'}
+                                  </TableCell>
+                                </TableRow>
+                              );
+                            })}
+                          </TableBody>
+                        </Table>
+                      </div>
+                    )}
                   </CardContent>
                 </Card>
               ))}
