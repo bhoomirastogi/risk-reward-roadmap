@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { StockRecommendation } from '../utils/stockRecommendations';
 import { ArrowUp, ArrowDown } from 'lucide-react';
@@ -10,10 +9,7 @@ interface StockCardProps {
 }
 
 const StockCard: React.FC<StockCardProps> = ({ stock, investmentAmount }) => {
-  // Calculate the rupee amount based on allocation percentage
   const allocationAmount = (stock.allocation / 100) * investmentAmount;
-  
-  // Determine if the stock has been performing well
   const isPerforming = stock.fiveYearPerformance > 100;
 
   return (
