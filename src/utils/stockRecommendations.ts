@@ -1,16 +1,13 @@
-// src/utils/stockRecommendations.ts
-
 export interface StockRecommendation {
   ticker: string;
   name: string;
   sector: string;
   performance: number;
+  fiveYearPerformance: number;
+  risk: 'low' | 'medium' | 'high';
   allocation: number;
   description: string;
   investmentAmount: number;
-  // Fixes: Added missing properties to match StockCard component
-  fiveYearPerformance: number;
-  risk: 'low' | 'medium' | 'high';
 }
 
 export type RiskProfile = 'low' | 'medium' | 'high';
@@ -21,10 +18,9 @@ export interface UserProfile {
   investmentTerm: InvestmentTerm;
   investmentAmount: number;
   monthlyAddition?: number;
-  sectors?: string[];
+  sectors?: string[]; 
   tickers?: string[];
 }
-
 export const getRecommendations = async (profile: UserProfile): Promise<StockRecommendation[]> => {
   try {
     const response = await fetch('http://127.0.0.1:5000/api/recommendations', {
